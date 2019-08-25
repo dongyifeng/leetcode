@@ -77,6 +77,21 @@ def deleteNode(head, x):
     return head
 
 
+def reverseList(head):
+    if not head or not head.next: return head
+    dump = ListNode(0)
+    dump.next = head
+
+    new_head = ListNode(None)
+    tail = head
+    while dump and dump.next:
+        t = dump.next
+        dump.next = dump.next.next
+        t2 = new_head.next
+        new_head.next = t
+        t.next = t2
+    return (new_head.next, tail)
+
 l1 = ListNode(1)
 l1.next = ListNode(2)
 l1.next.next = ListNode(3)
@@ -89,4 +104,4 @@ l1.next.next.next.next = ListNode(5)
 
 # foreachListNode(insertNode2(l1, 1, ListNode(6)))
 
-foreachListNode(find(l1, 5))
+# foreachListNode(find(l1, 5))
