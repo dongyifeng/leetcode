@@ -34,12 +34,7 @@ from Stack import *
 
 
 def isValid(s):
-    """
-    :type s: str
-    :rtype: bool
-    """
-
-    pair = dict([("(", ")"), ("[", "]"), ("{", "}")])
+    pair = {"(": ")", "[": "]", "{": "}"}
     stack = Stack()
     for char in list(s):
         if char in pair:
@@ -50,18 +45,32 @@ def isValid(s):
     return stack.is_empty()
 
 
-print isValid("()")
+# 优化后
+def isValid2(s):
+    pair = {"(": ")", "[": "]", "{": "}", "?": "?"}
+    stack = ['?']
 
-print isValid("()[]{}")
+    for char in list(s):
+        if char in pair:
+            stack.append(char)
+        elif pair[stack.pop()] != char:
+            return False
 
-print isValid("(]")
+    return len(stack) == 1
 
-print isValid("([)]")
 
-print isValid("{[]}")
+# print isValid2("()")
+#
+# print isValid2("()[]{}")
+#
+# print isValid2("(]")
+#
+# print isValid2("([)]")
+#
+# print isValid2("{[]}")
+#
+# print isValid2("{[]}")
 
-print isValid("{[]}")
+print isValid2("]")
 
-print isValid("]")
-
-print isValid("[")
+print isValid2("[")
